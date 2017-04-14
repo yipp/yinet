@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+	<!-- 配置文件路劲别名
+		<typeAlias type="com.ppdashi.mybatisTest.User" alias="User"/> -->
+		<!-- 为某个包路径下的所有类指定别名,如com.ppdashi.mybatisTest下的所有的类
+		 默认别名为类名，如User -->
+			<package name="com.ppdashi.Tools.jdbc.clazz"/>
+		
+	</typeAliases>
+</configuration>
