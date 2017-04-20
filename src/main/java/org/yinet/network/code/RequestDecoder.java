@@ -17,23 +17,23 @@ public class RequestDecoder extends ByteToMessageDecoder{
 	protected void decode(ChannelHandlerContext ctx, ByteBuf buffer, List<Object> out) throws Exception {
 	
 		if(buffer.readableBytes()>=BASE_LENGTH){
-			//第一个可读数据包的起始位�?
+			//第一个可读数据包的起始位
 			int beginIndex;
 			while(true){
-				//包头�?始有游标位置
+				//包头开始移动游标位置
 				beginIndex = buffer.readerIndex();
-				//标记初始读游标位�?
+				//标记初始读游标位
 				buffer.markReaderIndex();
-				if (buffer.readInt() == -777888) {//如果是包�?
-					break;//�?直循环知道读取到包头为止跳出循环执行下一个语�?
+				if (buffer.readInt() == -777888) {//如果是包头
+					break;//一直循环直到读取到包头为止跳出循环执行下一个语句
 				}
 			}
-			//读取命令�?
+			//读取命令号
 			int id = buffer.readInt();
 			//读取数据长度
 			int length = buffer.readInt();
 			if(length<0){
-				//没有数据过来就关闭链�?
+				//没有数据过来就关闭链
 				ctx.channel().close();
 			}
 			//数据包没到齐

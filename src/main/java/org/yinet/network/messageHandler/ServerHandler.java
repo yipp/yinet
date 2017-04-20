@@ -31,9 +31,6 @@ public class ServerHandler extends SimpleChannelInboundHandler<Request>{
 		 */
 		String username = LoginDataManage.playerIdMap.get(ctx.channel());
 		Integer id = LoginDataManage.playerUsernameMap.get(username);
-		//Channel channel = LoginDataManage.playerLoginMap.get(id);
-		//System.out.println(username + "-:-"+id+"-:-"+channel);
-		
 		LoginDataManage.playerIdMap.remove(ctx.channel());
 		/**
 		 * 用账号移除对应的integer
@@ -47,10 +44,6 @@ public class ServerHandler extends SimpleChannelInboundHandler<Request>{
 		LoginDataManage.playerLoginMap.remove(id);
 
 		ctx.channel().close();
-		
-//		System.out.println(LoginDataManage.playerIdMap.size()+"----");
-//		System.out.println(LoginDataManage.playerUsernameMap.size()+"----");
-//		System.out.println(LoginDataManage.playerLoginMap.size()+"----");
 	}
 
 	@Override
@@ -58,9 +51,6 @@ public class ServerHandler extends SimpleChannelInboundHandler<Request>{
 		System.out.println("用户下线");
 		String username = LoginDataManage.playerIdMap.get(ctx.channel());
 		Integer id = LoginDataManage.playerUsernameMap.get(username);
-		//Channel channel = LoginDataManage.playerLoginMap.get(id);
-		//System.out.println(username + "-:-"+id+"-:-"+channel);
-		
 		LoginDataManage.playerIdMap.remove(ctx.channel());
 		/**
 		 * 用账号移除对应的integer
@@ -74,12 +64,10 @@ public class ServerHandler extends SimpleChannelInboundHandler<Request>{
 		LoginDataManage.playerLoginMap.remove(id);
 		
 		ctx.channel().close();
-		//super.exceptionCaught(ctx, cause);
 	}
 
 	@Override
 	protected void channelRead0(ChannelHandlerContext ctx, Request request) throws Exception {
-		//System.out.println(ctx.channel());
 		//将消息发送到消息分发
 		messageTransimt(ctx.channel(), request);
 	}

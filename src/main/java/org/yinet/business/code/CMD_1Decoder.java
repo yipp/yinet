@@ -11,15 +11,20 @@ public class CMD_1Decoder implements Decoder<String>{
  */
 	public String getObjectForDecoder(byte[] bytes) {
 		String str;
-		ByteBuf buffer = Unpooled.buffer();
-		buffer.writeBytes(bytes);
-		int size = buffer.readInt();
-		if (size<=0) {
-			str = "";
+		try {
+			ByteBuf buffer = Unpooled.buffer();
+			buffer.writeBytes(bytes);
+			int size = buffer.readInt();
+			if (size<=0) {
+				str = "";
+			}
+			byte[] buf = new byte[size];
+			buffer.readBytes(buf);
+			str = new String(buf,ByteArray.CHARSET);
+		} catch (Exception e) {
+			str = null;
+			throw new RuntimeException(this.getClass()+"类反序列化失败");
 		}
-		byte[] buf = new byte[size];
-		buffer.readBytes(buf);
-		str = new String(buf,ByteArray.CHARSET);
 		return str;
 	}
 

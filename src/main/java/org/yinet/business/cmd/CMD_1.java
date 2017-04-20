@@ -17,15 +17,19 @@ public class CMD_1 extends CMDIple{
 	private CMD_1Decoder cmd_1Decoder;
 	@Autowired
 	private UserDao dao;
+	User user = null;
 	public void MessageDecode(Request request) {
 		//将客户端的数据反序列化
 		//String str = cmd_1Decoder.getObjectForDecoder(request.getDATA());
 //System.out.println(str);
 	}
 	public void MessageHandler(Channel channel) {
-		User user = dao.selectUser(50);//链接数据库
-System.out.println(user);
-
+		try {
+			user = dao.selectUser(50);//链接数据库
+	System.out.println(user);
+		} catch (Exception e) {
+			throw new RuntimeException(this.getClass()+"操作数据库失败"+user);
+		}
 		ByteBuf buf = Unpooled.buffer();
 		buf.writeInt(3);//将一个3的数值返回回去
 		byte[] data = new byte[buf.readableBytes()];

@@ -33,7 +33,11 @@ public class CMDIple implements MessageHandlerDAO {
 	 * MessageTransmit(Channel channel)
 	 */
 	public void MessageTransmit(Channel channel) {
-		channel.writeAndFlush(response);
+		try{
+			channel.writeAndFlush(response);
+			}catch(Exception e){
+				throw new RuntimeException(getClass()+"数据回发错误");
+			}
 	}
 /**
  * 将数据进行传输模型封装
